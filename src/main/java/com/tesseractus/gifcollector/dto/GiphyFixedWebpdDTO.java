@@ -1,0 +1,11 @@
+package com.tesseractus.gifcollector.dto;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class GiphyFixedWebpdDTO extends GiphyStillDTO {
+    private String webp;
+    private String webpSize;
+}
