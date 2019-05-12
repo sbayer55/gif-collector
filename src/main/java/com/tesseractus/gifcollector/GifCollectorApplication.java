@@ -10,8 +10,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @SpringBootApplication
 @EnableFeignClients
 @EnableConfigurationProperties
-@EnableAuthorizationServer
-@EnableResourceServer
 public class GifCollectorApplication {
 
 	public static void main(String[] args) {

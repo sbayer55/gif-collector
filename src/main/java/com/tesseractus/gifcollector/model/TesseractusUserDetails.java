@@ -9,8 +9,8 @@ import java.util.Collection;
 
 @AllArgsConstructor
 public class TesseractusUserDetails implements UserDetails {
-    private String password;
     private String username;
+    private String password;
     private Boolean accountNonExpired;
     private Boolean accountNonLocked;
     private Boolean credentialsNonExpired;
@@ -23,13 +23,13 @@ public class TesseractusUserDetails implements UserDetails {
     }
 
     @Override
-    public String getPassword() {
-        return this.password;
+    public String getUsername() {
+        return this.username;
     }
 
     @Override
-    public String getUsername() {
-        return this.username;
+    public String getPassword() {
+        return this.password;
     }
 
     @Override
