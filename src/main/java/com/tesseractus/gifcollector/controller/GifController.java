@@ -1,7 +1,6 @@
 package com.tesseractus.gifcollector.controller;
 
-import com.tesseractus.gifcollector.dto.GiphySearchResponseDTO;
-import com.tesseractus.gifcollector.feign.GiphyFeign;
+import com.tesseractus.gifcollector.dto.GifSearchResponseDTO;
 import com.tesseractus.gifcollector.service.GifService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,7 +16,9 @@ public class GifController {
     private GifService gifService;
 
     @RequestMapping("/gif")
-    public GiphySearchResponseDTO findGif(@RequestParam String q) {
-        return gifService.findGif(q);
+    public GifSearchResponseDTO findGif(@RequestParam String q,
+                                        @RequestParam(required = false) Integer limit,
+                                        @RequestParam(required = false) Integer offset) {
+        return gifService.findGif(q, limit, offset);
     }
 }
