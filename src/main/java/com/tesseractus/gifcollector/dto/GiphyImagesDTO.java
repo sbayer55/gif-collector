@@ -1,17 +1,20 @@
 package com.tesseractus.gifcollector.dto;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class GiphyImagesDTO {
     private GiphyFixedDTO fixedHeight;
     private GiphyStillDTO fixedHeightStill;
-    private GiphyFixedWebpdDTO fixedHeightDownsampled;
+    private GiphyFixedWebpDTO fixedHeightDownsampled;
     private GiphyFixedDTO fixedWidth;
     private GiphyStillDTO fixedWidthStill;
-    private GiphyFixedWebpdDTO fixedWidthDownsampled;
+    private GiphyFixedWebpDTO fixedWidthDownsampled;
     private GiphyFixedDTO fixedHeightSmall;
     private GiphyStillDTO fixedHeightSmallStill;
     private GiphyFixedDTO fixedWidthSmall;

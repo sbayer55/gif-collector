@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class GiphyMP4DetailedDTO extends GiphyMP4DTO {
-    private String width;
-    private String height;
+public class GiphyFixedWebpDTO extends GiphyStillDTO {
+    private String webp;
+    private String webpSize;
 }

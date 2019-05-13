@@ -1,6 +1,8 @@
 package com.tesseractus.gifcollector.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.lang.Nullable;
@@ -9,12 +11,12 @@ import java.util.List;
 
 @Getter
 @Setter
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class GiphyDataDTO {
     private String type;
     private String id;
     private String slug;
     private String url;
-    @JsonProperty("bitly_url")
     private String bitlyUrl;
     private String embedUrl;
     private String username;
