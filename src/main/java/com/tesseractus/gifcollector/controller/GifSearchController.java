@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin("http://localhost:4200")
 @RequestMapping("/api")
+@CrossOrigin("http://localhost:4200")
 public class GifSearchController {
 
     private GifSearchService gifSearchService;

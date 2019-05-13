@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS application_user;
 CREATE TABLE application_user (
     `id` INT NOT NULL AUTO_INCREMENT,
-    `username` VARCHAR(50),
-    `password` VARCHAR(50),
+    `username` VARCHAR(256),
+    `password` VARCHAR(256),
     `first_name` VARCHAR(50),
     `last_name` VARCHAR(50),
     PRIMARY KEY (`id`)
@@ -73,7 +73,7 @@ DROP TABLE IF EXISTS gif;
 CREATE TABLE gif (
     `id` INT NOT NULL AUTO_INCREMENT,
     `owner_id` INT NOT NULL,
-    `imported_datetime` TIMESTAMP,
+    `import_datetime` TIMESTAMP,
     `trending_datetime` TIMESTAMP,
     `title` VARCHAR(255),
     `fixed_height_url` VARCHAR(2083),
