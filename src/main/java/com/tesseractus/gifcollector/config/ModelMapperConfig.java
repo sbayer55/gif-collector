@@ -1,16 +1,10 @@
 package com.tesseractus.gifcollector.config;
 
-import com.tesseractus.gifcollector.dao.User;
 import com.tesseractus.gifcollector.dto.*;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeMap;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.stream.Collectors;
 
 @Slf4j
 @Configuration

@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin
 public class SignupController {
     private SignupService signupService;
 
-    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    @PostMapping(value = "/signup")
     public ResponseEntity signup(@RequestBody UserDTO userDTO) {
         try {
             signupService.addUser(userDTO);

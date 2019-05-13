@@ -73,7 +73,7 @@ DROP TABLE IF EXISTS gif;
 CREATE TABLE gif (
     `id` INT NOT NULL AUTO_INCREMENT,
     `owner_id` INT NOT NULL,
-    `imported_datetime` TIMESTAMP,
+    `import_datetime` TIMESTAMP,
     `trending_datetime` TIMESTAMP,
     `title` VARCHAR(255),
     `fixed_height_url` VARCHAR(2083),

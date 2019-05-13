@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class GifController {
     private GifService gifService;
 
-    @RequestMapping(value = "/gif", method = RequestMethod.PUT)
+    @PutMapping(value = "/gif")
     public ResponseEntity put(@RequestBody GifDTO gifDTO) {
         gifService.save(gifDTO);
         return ResponseEntity.ok().build();
