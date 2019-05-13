@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS application_user;
 CREATE TABLE application_user (
     `id` INT NOT NULL AUTO_INCREMENT,
-    `username` VARCHAR(50),
-    `password` VARCHAR(50),
+    `username` VARCHAR(256),
+    `password` VARCHAR(256),
     `first_name` VARCHAR(50),
     `last_name` VARCHAR(50),
     PRIMARY KEY (`id`)
