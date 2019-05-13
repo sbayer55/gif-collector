@@ -1,10 +1,13 @@
 package com.tesseractus.gifcollector.service;
 
 import com.tesseractus.gifcollector.dao.Gif;
+import com.tesseractus.gifcollector.dao.GifTag;
 import com.tesseractus.gifcollector.dao.User;
 import com.tesseractus.gifcollector.dto.GifDTO;
 import com.tesseractus.gifcollector.model.TesseractusUserDetails;
 import com.tesseractus.gifcollector.repository.GifRepository;
+import com.tesseractus.gifcollector.repository.GifTagLinkRepository;
+import com.tesseractus.gifcollector.repository.GifTagRepository;
 import com.tesseractus.gifcollector.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +22,8 @@ import org.springframework.stereotype.Service;
 public class GifService {
     private ModelMapper modelMapper;
     private GifRepository gifRepository;
+    private GifTagRepository gifTagRepository;
+    private GifTagLinkRepository gifTagLinkRepository;
     private UserRepository userRepository;
 
     public void save(GifDTO gifDTO) {
@@ -34,5 +39,9 @@ public class GifService {
             log.warn("Unable to coerce user from security context");
         }
         gifRepository.save(gif);
+    }
+
+    public void tagGif(Integer gifId, String tag) {
+
     }
 }
