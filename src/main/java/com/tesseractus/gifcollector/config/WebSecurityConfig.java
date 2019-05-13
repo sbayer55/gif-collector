@@ -92,16 +92,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return store;
     }
 
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-////        return new BCryptPasswordEncoder();
-//        return NoOpPasswordEncoder.getInstance();
-//    }
-
     @Bean
     public DelegatingPasswordEncoder delegatingPasswordEncoder() {
         String idForEncode = "bcrypt";
-        Map<String, PasswordEncoder> encoders = new HashMap();
+        Map<String, PasswordEncoder> encoders = new HashMap<>();
         encoders.put(idForEncode, new BCryptPasswordEncoder());
         encoders.put("noop", NoOpPasswordEncoder.getInstance());
         return new DelegatingPasswordEncoder(idForEncode, encoders);
