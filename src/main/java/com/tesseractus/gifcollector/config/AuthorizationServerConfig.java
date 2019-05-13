@@ -13,38 +13,35 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
+import javax.sql.DataSource;
+
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
-    private static final String CLIENT_ID = "admin";
-    private static final String CLIENT_SECRET = "password";
+    public static final String REALM = "TESSERACTUS";
 
     private TokenStore tokenStore;
     private UserApprovalHandler userApprovalHandler;
     private AuthenticationManager authenticationManager;
     private TesseractusUserDetailsService userDetailsService;
+    private DataSource dataSource;
 
     @Autowired
     public AuthorizationServerConfig(TokenStore tokenStore,
                                      UserApprovalHandler userApprovalHandler,
                                      @Qualifier("authenticationManagerBean") AuthenticationManager authenticationManager,
-                                     TesseractusUserDetailsService userDetailsService) {
+                                     TesseractusUserDetailsService userDetailsService,
+                                     DataSource dataSource) {
         this.tokenStore = tokenStore;
         this.userApprovalHandler = userApprovalHandler;
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;
+        this.dataSource = dataSource;
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
-        configurer.inMemory()
-                .withClient(CLIENT_ID)
-                .secret(CLIENT_SECRET)
-                .authorizedGrantTypes("password", "refresh_token")
-                .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
-                .scopes("read", "write", "trust")
-                .accessTokenValiditySeconds(300)
-                .refreshTokenValiditySeconds(2592000);
+        configurer.jdbc(dataSource);
     }
 
     @Override
@@ -57,6 +54,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer configurer) {
-        configurer.realm("CRM_REALM");
+        configurer.realm(REALM);
     }
 }

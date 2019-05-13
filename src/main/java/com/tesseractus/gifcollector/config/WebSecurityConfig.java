@@ -15,6 +15,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
@@ -22,30 +25,19 @@ import org.springframework.security.oauth2.provider.approval.TokenApprovalStore;
 import org.springframework.security.oauth2.provider.approval.TokenStoreUserApprovalHandler;
 import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+
+import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @AllArgsConstructor
 @Configuration
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private ClientDetailsService clientDetailsService;
     private TesseractusUserDetailsService userDetailsService;
-
-    @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
-    }
-
-//    @Autowired
-//    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("admin")
-//                .password("{noop}password")
-//                .roles("ADMIN", "USER");
-//    }
 
     @Override
     @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -60,8 +52,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/oauth/token").permitAll()
                 .antMatchers("/console/**").permitAll()
                 .anyRequest().authenticated()
-                .and().httpBasic().realmName("CRM_REALM")
+                .and().httpBasic().realmName(AuthorizationServerConfig.REALM)
                 .and().headers().frameOptions().sameOrigin();
+    }
+
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        auth.userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder);
     }
 
     @Override
@@ -71,8 +70,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public TokenStore tokenStore() {
-        return new InMemoryTokenStore();
+    public JdbcTokenStore tokenStore(DataSource dataSource) {
+        return new JdbcTokenStore(dataSource);
     }
 
     @Bean
@@ -93,8 +92,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return store;
     }
 
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+////        return new BCryptPasswordEncoder();
+//        return NoOpPasswordEncoder.getInstance();
+//    }
+
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public DelegatingPasswordEncoder delegatingPasswordEncoder() {
+        String idForEncode = "bcrypt";
+        Map<String, PasswordEncoder> encoders = new HashMap();
+        encoders.put(idForEncode, new BCryptPasswordEncoder());
+        encoders.put("noop", NoOpPasswordEncoder.getInstance());
+        return new DelegatingPasswordEncoder(idForEncode, encoders);
     }
 }

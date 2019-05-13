@@ -12,8 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
-import java.util.Optional;
-import java.util.stream.StreamSupport;
 
 @Slf4j
 @Service
@@ -23,21 +21,20 @@ public class TesseractusUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
+        log.debug("User detail request for username: \"{}\"", username);
         try {
-            log.info("User detail request for \"{}\"", username);
             User user = userRepository.findByUsername(username)
                     .orElseThrow(RuntimeException::new);
-            TesseractusUserDetails userDetails = new TesseractusUserDetails(user.getUsername(),
+
+            return new TesseractusUserDetails(user.getUsername(),
                     user.getPassword(),
                     true,
                     true,
                     true,
                     true,
                     Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")));
-            log.info("User details: {}", userDetails);
-            return userDetails;
         } catch (Exception e) {
-            log.warn("Unsuccessful attempt to authenticate from {}", username);
+            log.warn("Unsuccessful attempt to authenticate for username {}", username, e);
             throw new UsernameNotFoundException("User " + username + " was not found in the database", e);
         }
     }
