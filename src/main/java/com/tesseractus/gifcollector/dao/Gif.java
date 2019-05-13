@@ -18,8 +18,9 @@ import java.time.LocalDateTime;
 @Entity(name = "gif")
 public class Gif {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private Integer ownerId;
     private LocalDateTime importDatetime;
     private LocalDateTime trendingDatetime;
     private String title;
