@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS user;
-CREATE TABLE user (
-    `id` INt NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS application_user;
+CREATE TABLE application_user (
+    `id` INT NOT NULL AUTO_INCREMENT,
     `username` VARCHAR(50),
     `password` VARCHAR(50),
     `first_name` VARCHAR(50),
@@ -61,10 +61,30 @@ CREATE TABLE oauth_code (
 
 DROP TABLE IF EXISTS oauth_approvals;
 CREATE TABLE oauth_approvals (
-	userId VARCHAR(256),
-	clientId VARCHAR(256),
-	scope VARCHAR(256),
-	status VARCHAR(10),
-	expiresAt TIMESTAMP,
-	lastModifiedAt TIMESTAMP
+	`user_id` VARCHAR(256),
+	`client_id` VARCHAR(256),
+	`scope` VARCHAR(256),
+	`status` VARCHAR(10),
+	`expires_at` TIMESTAMP,
+	`last_modified_at` TIMESTAMP
+);
+
+DROP TABLE IF EXISTS gif;
+CREATE TABLE gif (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `owner_id` INT NOT NULL,
+    `imported_datetime` TIMESTAMP,
+    `trending_datetime` TIMESTAMP,
+    `title` VARCHAR(255),
+    `fixed_height_url` VARCHAR(2083),
+    `fixed_height_width` INT,
+    `fixed_height_height` INT,
+    `fixed_height_small_still_url` VARCHAR(2083),
+    `fixed_height_small_still_width` INT,
+    `fixed_height_small_still_height` INT,
+    `original_url` VARCHAR(2083),
+    `original_width` INT,
+    `original_height` INT,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`owner_id`) REFERENCES application_user(`id`)
 );

@@ -26,8 +26,6 @@ public class ModelMapperConfig {
                 .addMapping(GiphyStillDTO::getUrl, GifVersionDTO::setUrl);
 
         modelMapper.createTypeMap(GiphyDataDTO.class, GifDTO.class)
-                .addMapping(data -> data.getImages().getFixedWidth(), GifDTO::setFixedWidth)
-                .addMapping(data -> data.getImages().getFixedWidthSmallStill(), GifDTO::setFixedWidthSmallStill)
                 .addMapping(data -> data.getImages().getFixedHeight(), GifDTO::setFixedHeight)
                 .addMapping(data -> data.getImages().getFixedHeightSmallStill(), GifDTO::setFixedHeightSmallStill)
                 .addMapping(data -> data.getImages().getOriginal(), GifDTO::setOriginal);

@@ -1,26 +1,20 @@
 package com.tesseractus.gifcollector.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tesseractus.gifcollector.config.GiphyConfig;
-import com.tesseractus.gifcollector.dto.GifSearchResponseDTO;
-import com.tesseractus.gifcollector.dto.GiphySearchResponseDTO;
-import com.tesseractus.gifcollector.feign.GiphyFeign;
+import com.tesseractus.gifcollector.dao.Gif;
+import com.tesseractus.gifcollector.dto.GifDTO;
+import com.tesseractus.gifcollector.repository.GifRepository;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-@Slf4j
 @Service
 @AllArgsConstructor
 public class GifService {
-    private GiphyFeign giphyFeign;
-    private GiphyConfig giphyConfig;
     private ModelMapper modelMapper;
+    private GifRepository gifRepository;
 
-    public GifSearchResponseDTO findGif(String q, Integer limit, Integer offset) {
-        log.trace("Calling GiphyFeign.findGif");
-        GiphySearchResponseDTO giphySearchResponse = giphyFeign.findGif(giphyConfig.getApiToken(), q, limit, offset, giphyConfig.getSearchRating(), null, null);
-        return modelMapper.map(giphySearchResponse, GifSearchResponseDTO.class);
+    public void save(GifDTO gifDTO) {
+        Gif gif = modelMapper.map(gifDTO, Gif.class);
+        gifRepository.save(gif);
     }
 }

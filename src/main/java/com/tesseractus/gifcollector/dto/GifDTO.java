@@ -11,7 +11,5 @@ public class GifDTO {
     private String title;
     private GifVersionDTO fixedHeight;
     private GifVersionDTO fixedHeightSmallStill;
-    private GifVersionDTO fixedWidth;
-    private GifVersionDTO fixedWidthSmallStill;
     private GifVersionDTO original;
 }
