@@ -21,6 +21,9 @@ public class GifSearchService {
     public GifSearchResponseDTO findGif(String q, Integer limit, Integer offset) {
         log.trace("Calling GiphyFeign.findGif");
         GiphySearchResponseDTO giphySearchResponse = giphyFeign.findGif(giphyConfig.getApiToken(), q, limit, offset, giphyConfig.getSearchRating(), null, null);
-        return modelMapper.map(giphySearchResponse, GifSearchResponseDTO.class);
+        GifSearchResponseDTO response = modelMapper.map(giphySearchResponse, GifSearchResponseDTO.class);
+
+        log.debug("Found {} gifs", giphySearchResponse.getPagination().getTotalCount());
+        return response;
     }
 }

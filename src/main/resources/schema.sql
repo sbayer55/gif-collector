@@ -92,16 +92,8 @@ CREATE TABLE gif (
 DROP TABLE IF EXISTS gif_tag;
 CREATE TABLE gif_tag (
     `id` INT NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(255),
-    PRIMARY KEY (`id`)
-);
-
-DROP TABLE IF EXISTS gif_tag_link;
-CREATE TABLE gif_tag_link (
-    `id` INT NOT NULL AUTO_INCREMENT,
     `gif_id` INT NOT NULL,
-    `gif_tag_id` INT NOT NULL,
+    `name` VARCHAR(255),
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`gif_id`) REFERENCES gif(`id`),
-    FOREIGN KEY (`gif_tag_id`) REFERENCES gif_tag(`id`)
+    FOREIGN KEY (`gif_id`) REFERENCES gif(`id`)
 );

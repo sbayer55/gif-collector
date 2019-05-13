@@ -22,7 +22,8 @@ public class ModelMapperConfig {
         modelMapper.createTypeMap(GiphyDataDTO.class, GifDTO.class)
                 .addMapping(data -> data.getImages().getFixedHeight(), GifDTO::setFixedHeight)
                 .addMapping(data -> data.getImages().getFixedHeightSmallStill(), GifDTO::setFixedHeightSmallStill)
-                .addMapping(data -> data.getImages().getOriginal(), GifDTO::setOriginal);
+                .addMapping(data -> data.getImages().getOriginal(), GifDTO::setOriginal)
+                .addMapping(data -> null, GifDTO::setId);
 
         modelMapper.createTypeMap(GiphySearchResponseDTO.class, GifSearchResponseDTO.class)
                 .addMapping(GiphySearchResponseDTO::getData, GifSearchResponseDTO::setGifs)

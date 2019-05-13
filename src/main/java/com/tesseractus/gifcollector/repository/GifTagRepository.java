@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface GifTagRepository extends CrudRepository<GifTag, Integer> {
-    @Query("FROM git_tag WHERE name = :name")
+    @Query("FROM gif_tag WHERE name = :name")
     Optional<GifTag> findByName(@Param("name") String name);
 }
