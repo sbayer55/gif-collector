@@ -26,13 +26,7 @@ public class TesseractusUserDetailsService implements UserDetailsService {
             User user = userRepository.findByUsername(username)
                     .orElseThrow(RuntimeException::new);
 
-            return new TesseractusUserDetails(user.getUsername(),
-                    user.getPassword(),
-                    true,
-                    true,
-                    true,
-                    true,
-                    Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")));
+            return TesseractusUserDetails.generateDefaultPrivilegedUserDetails(user);
         } catch (Exception e) {
             log.warn("Unsuccessful attempt to authenticate for username {}", username, e);
             throw new UsernameNotFoundException("User " + username + " was not found in the database", e);

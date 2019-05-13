@@ -1,11 +1,14 @@
 package com.tesseractus.gifcollector.model;
 
+import com.tesseractus.gifcollector.dao.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 
 @AllArgsConstructor
 public class TesseractusUserDetails implements UserDetails {
@@ -16,6 +19,16 @@ public class TesseractusUserDetails implements UserDetails {
     private Boolean credentialsNonExpired;
     private Boolean enabled;
     private Collection<GrantedAuthority> authorities;
+
+    public static TesseractusUserDetails generateDefaultPrivilegedUserDetails(User user) {
+        return new TesseractusUserDetails(user.getUsername(),
+                user.getPassword(),
+                true,
+                true,
+                true,
+                true,
+                Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")));
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
