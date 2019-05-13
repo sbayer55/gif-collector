@@ -25,16 +25,4 @@ public class SignupService {
                 userDTO.getLastName());
         return userRepository.save(user);
     }
-
-    @PostConstruct
-    private void setupDefaultUser() {
-        if (userRepository.count() == 0) {
-            User defaultUser = new User(null,
-                    "default",
-                    passwordEncoder.encode("password"),
-                    "Steven",
-                    "Bayer");
-            userRepository.save(defaultUser);
-        }
-    }
 }
