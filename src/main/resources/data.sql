@@ -42,7 +42,7 @@ INSERT INTO application_user (
 )
 VALUES (
     'steven',
-    '{bcrypt}$2a$04$nGjf/uX4dmGx4fgvVPdlQu7ji1LA7wECj09abDpdv9etc9kmg9hT2',
+    '$2a$04$nGjf/uX4dmGx4fgvVPdlQu7ji1LA7wECj09abDpdv9etc9kmg9hT2',
     '',
     ''
 );
