@@ -19,11 +19,11 @@ public class ModelMapperConfig {
                 .addMapping(GiphyStillDTO::getWidth, GifVersionDTO::setWidth)
                 .addMapping(GiphyStillDTO::getUrl, GifVersionDTO::setUrl);
 
-        modelMapper.createTypeMap(GiphyDataDTO.class, GifDTO.class)
-                .addMapping(data -> data.getImages().getFixedHeight(), GifDTO::setFixedHeight)
-                .addMapping(data -> data.getImages().getFixedHeightSmallStill(), GifDTO::setFixedHeightSmallStill)
-                .addMapping(data -> data.getImages().getOriginal(), GifDTO::setOriginal)
-                .addMapping(data -> null, GifDTO::setId);
+        modelMapper.createTypeMap(GiphyDataDTO.class, GifDto.class)
+                .addMapping(data -> data.getImages().getFixedHeight(), GifDto::setFixedHeight)
+                .addMapping(data -> data.getImages().getFixedHeightSmallStill(), GifDto::setFixedHeightSmallStill)
+                .addMapping(data -> data.getImages().getOriginal(), GifDto::setOriginal)
+                .addMapping(data -> null, GifDto::setId);
 
         modelMapper.createTypeMap(GiphySearchResponseDTO.class, GifSearchResponseDTO.class)
                 .addMapping(GiphySearchResponseDTO::getData, GifSearchResponseDTO::setGifs)

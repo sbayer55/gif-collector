@@ -33,6 +33,6 @@ public class Gif {
     private Integer originalWidth;
     private Integer originalHeight;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "gifId")
     private Set<GifTag> tags;
 }

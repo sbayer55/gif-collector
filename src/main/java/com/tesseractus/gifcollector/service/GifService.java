@@ -3,19 +3,18 @@ package com.tesseractus.gifcollector.service;
 import com.tesseractus.gifcollector.dao.Gif;
 import com.tesseractus.gifcollector.dao.GifTag;
 import com.tesseractus.gifcollector.dao.User;
-import com.tesseractus.gifcollector.dto.GifDTO;
+import com.tesseractus.gifcollector.dto.GifDto;
 import com.tesseractus.gifcollector.dto.TagRequestDto;
-import com.tesseractus.gifcollector.model.TesseractusUserDetails;
 import com.tesseractus.gifcollector.repository.GifRepository;
 import com.tesseractus.gifcollector.repository.GifTagRepository;
 import com.tesseractus.gifcollector.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,14 +28,11 @@ public class GifService {
     private GifTagRepository gifTagRepository;
     private UserRepository userRepository;
 
-    public void save(GifDTO gifDTO) {
+    public void save(Principal principal, GifDto gifDTO) {
         Gif gif = modelMapper.map(gifDTO, Gif.class);
         try {
-            TesseractusUserDetails userDetails = (TesseractusUserDetails) SecurityContextHolder.getContext()
-                    .getAuthentication()
-                    .getPrincipal();
-            User user = userRepository.findByUsername(userDetails.getUsername())
-                    .orElseThrow(() -> new UsernameNotFoundException("User " + userDetails.getUsername() + " not found"));
+            User user = userRepository.findByUsername(principal.getName())
+                    .orElseThrow(() -> new UsernameNotFoundException("User " + principal.getName() + " not found"));
             gif.setOwnerId(user.getId());
         } catch (Exception e) {
             log.warn("Unable to coerce user from security context");
@@ -51,15 +47,15 @@ public class GifService {
         gifTagRepository.save(tag);
     }
 
-    public List<GifDTO> findAll() {
+    public List<GifDto> findAll() {
         List<Gif> gifs = new ArrayList<>();
 
         gifRepository.findAll().forEach(gifs::add);
 
         log.info("Found {} gifs!", gifs.size());
-        List<GifDTO> gifDTOs = gifs.stream()
-                .map(gif -> modelMapper.map(gif, GifDTO.class))
+        List<GifDto> gifDtos = gifs.stream()
+                .map(gif -> modelMapper.map(gif, GifDto.class))
                 .collect(Collectors.toList());
-        return gifDTOs;
+        return gifDtos;
     }
 }
