@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class GiphyMetaDTO {
+public class GiphyMetaDto {
     private Integer status;
     private String msg;
     private String responseId;

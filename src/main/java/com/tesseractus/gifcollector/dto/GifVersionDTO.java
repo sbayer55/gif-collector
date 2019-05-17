@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class GifVersionDTO {
+public class GifVersionDto {
     private String url;
     private Integer width;
     private Integer height;

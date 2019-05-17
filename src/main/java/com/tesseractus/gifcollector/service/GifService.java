@@ -5,6 +5,7 @@ import com.tesseractus.gifcollector.dao.GifTag;
 import com.tesseractus.gifcollector.dao.User;
 import com.tesseractus.gifcollector.dto.GifDto;
 import com.tesseractus.gifcollector.dto.TagRequestDto;
+import com.tesseractus.gifcollector.dto.UserDto;
 import com.tesseractus.gifcollector.repository.GifRepository;
 import com.tesseractus.gifcollector.repository.GifTagRepository;
 import com.tesseractus.gifcollector.repository.UserRepository;
@@ -26,14 +27,13 @@ public class GifService {
     private ModelMapper modelMapper;
     private GifRepository gifRepository;
     private GifTagRepository gifTagRepository;
-    private UserRepository userRepository;
+    private UserService userService;
 
-    public void save(Principal principal, GifDto gifDTO) {
-        Gif gif = modelMapper.map(gifDTO, Gif.class);
+    public void save(Principal principal, GifDto gifDto) {
+        Gif gif = modelMapper.map(gifDto, Gif.class);
         try {
-            User user = userRepository.findByUsername(principal.getName())
-                    .orElseThrow(() -> new UsernameNotFoundException("User " + principal.getName() + " not found"));
-            gif.setOwnerId(user.getId());
+            UserDto userDto = userService.getUser(principal.getName());
+            gif.setOwnerId(userDto.getId());
         } catch (Exception e) {
             log.warn("Unable to coerce user from security context");
         }

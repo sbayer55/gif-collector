@@ -18,9 +18,9 @@ public class GifDto {
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime trendingDatetime;
     private String title;
-    private GifVersionDTO fixedHeight;
-    private GifVersionDTO fixedHeightSmallStill;
-    private GifVersionDTO original;
+    private GifVersionDto fixedHeight;
+    private GifVersionDto fixedHeightSmallStill;
+    private GifVersionDto original;
     private Integer id;
 
 }

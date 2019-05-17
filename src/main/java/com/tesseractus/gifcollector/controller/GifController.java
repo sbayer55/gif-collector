@@ -12,14 +12,13 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin("http://localhost:4200")
 @RequestMapping("/api/gif")
 public class GifController {
     private GifService gifService;
 
     @PutMapping
-    public ResponseEntity put(Principal principal, @RequestBody GifDto gifDTO) {
-        gifService.save(principal, gifDTO);
+    public ResponseEntity put(Principal principal, @RequestBody GifDto gifDto) {
+        gifService.save(principal, gifDto);
         return ResponseEntity.ok().build();
     }
 

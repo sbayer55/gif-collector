@@ -8,6 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class GiphyOriginalDTO extends GiphyFixedDTO {
+public class GiphyOriginalDto extends GiphyFixedDto {
     private String frames;
 }

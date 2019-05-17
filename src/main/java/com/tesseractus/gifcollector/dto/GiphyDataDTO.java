@@ -1,22 +1,19 @@
 package com.tesseractus.gifcollector.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.tesseractus.gifcollector.jackson.LocalDateTimeDeserializer;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.lang.Nullable;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class GiphyDataDTO {
+public class GiphyDataDto {
     private String type;
     private String id;
     private String slug;
@@ -36,7 +33,7 @@ public class GiphyDataDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = LocalDateTimeDeserializer.GIPHY_DATETIME_FORMAT)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime trendingDatetime;
-    private GiphyImagesDTO images;
+    private GiphyImagesDto images;
     private String title;
     private GiphyAnalyticsDto analytics;
 }

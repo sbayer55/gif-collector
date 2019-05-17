@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class GiphyPaginationDTO {
+public class GiphyPaginationDto {
     private Integer totalCount;
     private Integer count;
     private Integer offset;

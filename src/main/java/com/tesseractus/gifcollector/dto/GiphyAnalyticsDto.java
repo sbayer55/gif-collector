@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class GiphyAnalyticsDto {
-    private GiphyUrlDTO onload;
-    private GiphyUrlDTO onclick;
-    private GiphyUrlDTO onsent;
+    private GiphyUrlDto onload;
+    private GiphyUrlDto onclick;
+    private GiphyUrlDto onsent;
 }

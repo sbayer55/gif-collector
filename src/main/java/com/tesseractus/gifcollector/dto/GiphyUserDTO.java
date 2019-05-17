@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class GiphyUserDTO {
+public class GiphyUserDto {
     private String avatarUrl;
     private String bannerUrl;
     private String profileUrl;

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class GifSearchResponseDTO {
+public class GifSearchResponseDto {
     private List<GifDto> gifs;
     private Integer totalCount;
     private Integer count;

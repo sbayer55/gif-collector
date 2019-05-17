@@ -14,22 +14,22 @@ public class ModelMapperConfig {
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
 
-        modelMapper.createTypeMap(GiphyStillDTO.class, GifVersionDTO.class)
-                .addMapping(GiphyStillDTO::getHeight, GifVersionDTO::setHeight)
-                .addMapping(GiphyStillDTO::getWidth, GifVersionDTO::setWidth)
-                .addMapping(GiphyStillDTO::getUrl, GifVersionDTO::setUrl);
+        modelMapper.createTypeMap(GiphyStillDto.class, GifVersionDto.class)
+                .addMapping(GiphyStillDto::getHeight, GifVersionDto::setHeight)
+                .addMapping(GiphyStillDto::getWidth, GifVersionDto::setWidth)
+                .addMapping(GiphyStillDto::getUrl, GifVersionDto::setUrl);
 
-        modelMapper.createTypeMap(GiphyDataDTO.class, GifDto.class)
+        modelMapper.createTypeMap(GiphyDataDto.class, GifDto.class)
                 .addMapping(data -> data.getImages().getFixedHeight(), GifDto::setFixedHeight)
                 .addMapping(data -> data.getImages().getFixedHeightSmallStill(), GifDto::setFixedHeightSmallStill)
                 .addMapping(data -> data.getImages().getOriginal(), GifDto::setOriginal)
                 .addMapping(data -> null, GifDto::setId);
 
-        modelMapper.createTypeMap(GiphySearchResponseDTO.class, GifSearchResponseDTO.class)
-                .addMapping(GiphySearchResponseDTO::getData, GifSearchResponseDTO::setGifs)
-                .addMapping(res -> res.getPagination().getTotalCount(), GifSearchResponseDTO::setTotalCount)
-                .addMapping(res -> res.getPagination().getOffset(), GifSearchResponseDTO::setOffset)
-                .addMapping(res -> res.getPagination().getCount(), GifSearchResponseDTO::setCount);
+        modelMapper.createTypeMap(GiphySearchResponseDto.class, GifSearchResponseDto.class)
+                .addMapping(GiphySearchResponseDto::getData, GifSearchResponseDto::setGifs)
+                .addMapping(res -> res.getPagination().getTotalCount(), GifSearchResponseDto::setTotalCount)
+                .addMapping(res -> res.getPagination().getOffset(), GifSearchResponseDto::setOffset)
+                .addMapping(res -> res.getPagination().getCount(), GifSearchResponseDto::setCount);
 
         return modelMapper;
     }

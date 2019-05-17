@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class GiphyStillDTO extends GiphyUrlDTO {
+public class GiphyStillDto extends GiphyUrlDto {
     private String width;
     private String height;
     private String size;
