@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GifTagDto {
-    private Integer id;
+    private Integer tagId;
     private String name;
 }

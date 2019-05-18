@@ -2,9 +2,13 @@ package com.tesseractus.gifcollector.controller;
 
 import com.tesseractus.gifcollector.dto.GifDto;
 import com.tesseractus.gifcollector.dto.TagRequestDto;
+import com.tesseractus.gifcollector.exception.GifNotFoundException;
+import com.tesseractus.gifcollector.model.TesseractusUserDetails;
 import com.tesseractus.gifcollector.service.GifService;
+import javassist.tools.web.BadHttpRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -17,8 +21,9 @@ public class GifController {
     private GifService gifService;
 
     @PutMapping
-    public ResponseEntity put(Principal principal, @RequestBody GifDto gifDto) {
-        gifService.save(principal, gifDto);
+    public ResponseEntity put(@AuthenticationPrincipal final TesseractusUserDetails userDetails,
+                              @RequestBody GifDto gifDto) {
+        gifService.save(userDetails, gifDto);
         return ResponseEntity.ok().build();
     }
 
@@ -29,7 +34,7 @@ public class GifController {
     }
 
     @GetMapping
-    public List<GifDto> findAll() {
-        return gifService.findAll();
+    public List<GifDto> findAll(@AuthenticationPrincipal final TesseractusUserDetails userDetails) {
+        return gifService.findByPrincipal(userDetails);
     }
 }

@@ -1,11 +1,13 @@
+-- noinspection SqlNoDataSourceInspectionForFile
+
 DROP TABLE IF EXISTS application_user;
 CREATE TABLE application_user (
-    `id` INT NOT NULL AUTO_INCREMENT,
+    `user_id` INT NOT NULL AUTO_INCREMENT,
     `username` VARCHAR(256),
     `password` VARCHAR(256),
     `first_name` VARCHAR(50),
     `last_name` VARCHAR(50),
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`user_id`)
 );
 
 --DROP TABLE IF EXISTS oauth_client_details;
@@ -71,7 +73,7 @@ CREATE TABLE application_user (
 
 DROP TABLE IF EXISTS gif;
 CREATE TABLE gif (
-    `id` INT NOT NULL AUTO_INCREMENT,
+    `gif_id` INT NOT NULL AUTO_INCREMENT,
     `owner_id` INT NOT NULL,
     `import_datetime` TIMESTAMP,
     `trending_datetime` TIMESTAMP,
@@ -85,15 +87,23 @@ CREATE TABLE gif (
     `original_url` VARCHAR(2083),
     `original_width` INT,
     `original_height` INT,
-    PRIMARY KEY (`id`),
-    FOREIGN KEY (`owner_id`) REFERENCES application_user(`id`)
+    PRIMARY KEY (`gif_id`),
+    FOREIGN KEY (`owner_id`) REFERENCES application_user(`user_id`)
 );
 
 DROP TABLE IF EXISTS gif_tag;
 CREATE TABLE gif_tag (
-    `id` INT NOT NULL AUTO_INCREMENT,
+    `tag_id` INT NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(255) NOT NULL UNIQUE,
+    PRIMARY KEY (`tag_id`)
+);
+
+DROP TABLE IF EXISTS gif_tag_link;
+CREATE TABLE gif_tag_link (
+    `gif_link_id` INT NOT NULL AUTO_INCREMENT,
+    `tag_id` INT NOT NULL,
     `gif_id` INT NOT NULL,
-    `name` VARCHAR(255),
-    PRIMARY KEY (`id`),
-    FOREIGN KEY (`gif_id`) REFERENCES gif(`id`)
+    PRIMARY KEY (`gif_link_id`),
+    FOREIGN KEY (`gif_id`) REFERENCES gif(`gif_id`),
+    FOREIGN KEY (`tag_id`) REFERENCES gif_tag(`tag_id`)
 );

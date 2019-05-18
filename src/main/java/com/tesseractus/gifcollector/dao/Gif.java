@@ -18,7 +18,7 @@ import java.util.Set;
 public class Gif {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer gifId;
     private Integer ownerId;
     private LocalDateTime importDatetime;
     private LocalDateTime trendingDatetime;
@@ -33,6 +33,6 @@ public class Gif {
     private Integer originalWidth;
     private Integer originalHeight;
 
-    @OneToMany(mappedBy = "gifId")
-    private Set<GifTag> tags;
+    @OneToMany(mappedBy = "gif")
+    private Set<GifTagLink> tagLinks;
 }

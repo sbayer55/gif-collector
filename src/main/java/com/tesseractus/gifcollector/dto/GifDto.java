@@ -23,7 +23,7 @@ public class GifDto {
     private GifVersionDto fixedHeight;
     private GifVersionDto fixedHeightSmallStill;
     private GifVersionDto original;
-    private Integer id;
+    private Integer gifId;
 
-    private Set<GifTag> tags;
+    private Set<GifTagDto> tags;
 }
