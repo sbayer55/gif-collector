@@ -5,9 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserDto {
+public class GifTagDto {
     private Integer id;
-    private String username;
-    private String firstName;
-    private String lastName;
+    private String name;
 }

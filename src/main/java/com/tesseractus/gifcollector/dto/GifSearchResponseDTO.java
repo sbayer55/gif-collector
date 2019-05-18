@@ -7,8 +7,8 @@ import java.util.List;
 
 @Getter
 @Setter
-public class GifSearchResponseDTO {
-    private List<GifDTO> gifs;
+public class GifSearchResponseDto {
+    private List<GifDto> gifs;
     private Integer totalCount;
     private Integer count;
     private Integer offset;

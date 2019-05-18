@@ -10,8 +10,8 @@ import java.util.List;
 @Getter
 @Setter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class GiphySearchResponseDTO {
-    private List<GiphyDataDTO> data;
-    private GiphyPaginationDTO pagination;
-    private GiphyMetaDTO meta;
+public class GiphySearchResponseDto {
+    private List<GiphyDataDto> data;
+    private GiphyPaginationDto pagination;
+    private GiphyMetaDto meta;
 }

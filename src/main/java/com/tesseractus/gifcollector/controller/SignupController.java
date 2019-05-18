@@ -1,6 +1,6 @@
 package com.tesseractus.gifcollector.controller;
 
-import com.tesseractus.gifcollector.dto.UserDTO;
+import com.tesseractus.gifcollector.dto.CreateUserDto;
 import com.tesseractus.gifcollector.service.SignupService;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
@@ -15,9 +15,9 @@ public class SignupController {
     private SignupService signupService;
 
     @PostMapping(value = "/signup")
-    public ResponseEntity signup(@RequestBody UserDTO userDTO) {
+    public ResponseEntity signup(@RequestBody CreateUserDto createUserDto) {
         try {
-            signupService.addUser(userDTO);
+            signupService.addUser(createUserDto);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (DuplicateKeyException e) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);

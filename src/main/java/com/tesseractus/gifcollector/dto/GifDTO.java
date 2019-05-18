@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class GifDTO {
+public class GifDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = LocalDateTimeDeserializer.GIPHY_DATETIME_FORMAT)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime importDatetime;
@@ -18,8 +18,9 @@ public class GifDTO {
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime trendingDatetime;
     private String title;
-    private GifVersionDTO fixedHeight;
-    private GifVersionDTO fixedHeightSmallStill;
-    private GifVersionDTO original;
+    private GifVersionDto fixedHeight;
+    private GifVersionDto fixedHeightSmallStill;
+    private GifVersionDto original;
     private Integer id;
+
 }

@@ -1,7 +1,7 @@
 package com.tesseractus.gifcollector.service;
 
 import com.tesseractus.gifcollector.dao.User;
-import com.tesseractus.gifcollector.dto.UserDTO;
+import com.tesseractus.gifcollector.dto.CreateUserDto;
 import com.tesseractus.gifcollector.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,17 +18,17 @@ public class SignupService {
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
 
-    public User addUser(UserDTO userDTO) {
-        userRepository.findByUsername(userDTO.getUsername())
+    public User addUser(CreateUserDto createUserDto) {
+        userRepository.findByUsername(createUserDto.getUsername())
                 .ifPresent(user -> {
                     log.warn("Attempt to create duplicate user {}", user.getUsername());
                     throw new DuplicateKeyException(user.getUsername());
                 });
         User user = new User(null,
-                userDTO.getUsername(),
-                passwordEncoder.encode(userDTO.getPassword()),
-                userDTO.getFirstName(),
-                userDTO.getLastName());
+                createUserDto.getUsername(),
+                passwordEncoder.encode(createUserDto.getPassword()),
+                createUserDto.getFirstName(),
+                createUserDto.getLastName());
         return userRepository.save(user);
     }
 }

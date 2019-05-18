@@ -9,7 +9,7 @@ import org.springframework.lang.Nullable;
 @Getter
 @Setter
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class GiphyMP4DTO {
+public class GiphyMP4Dto {
     private String width;
     private String height;
     private String mp4;

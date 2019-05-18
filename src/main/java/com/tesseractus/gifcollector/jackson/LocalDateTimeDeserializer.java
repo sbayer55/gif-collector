@@ -21,7 +21,9 @@ public class LocalDateTimeDeserializer extends JsonDeserializer<LocalDateTime> {
         try {
             return LocalDateTime.parse(dateTimeString, formatter);
         } catch (DateTimeException e) {
-            log.warn("Unable to parse \"{}\" as LocalDateTime", dateTimeString, e);
+            log.warn("Unable to parse \"{}\" as LocalDateTime for object {}",
+                    dateTimeString,
+                    jsonParser.getCurrentValue().getClass().getName());
             return LocalDateTime.MIN;
         }
     }
