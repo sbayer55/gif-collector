@@ -2,11 +2,13 @@ package com.tesseractus.gifcollector.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.tesseractus.gifcollector.dao.GifTag;
 import com.tesseractus.gifcollector.jackson.LocalDateTimeDeserializer;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -23,4 +25,5 @@ public class GifDto {
     private GifVersionDto original;
     private Integer id;
 
+    private Set<GifTag> tags;
 }
