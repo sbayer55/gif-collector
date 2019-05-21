@@ -2,16 +2,13 @@ package com.tesseractus.gifcollector.controller;
 
 import com.tesseractus.gifcollector.dto.GifDto;
 import com.tesseractus.gifcollector.dto.TagRequestDto;
-import com.tesseractus.gifcollector.exception.GifNotFoundException;
 import com.tesseractus.gifcollector.model.TesseractusUserDetails;
 import com.tesseractus.gifcollector.service.GifService;
-import javassist.tools.web.BadHttpRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @RestController

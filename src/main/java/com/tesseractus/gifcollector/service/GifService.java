@@ -3,7 +3,6 @@ package com.tesseractus.gifcollector.service;
 import com.tesseractus.gifcollector.dao.Gif;
 import com.tesseractus.gifcollector.dao.GifTag;
 import com.tesseractus.gifcollector.dao.GifTagLink;
-import com.tesseractus.gifcollector.dao.User;
 import com.tesseractus.gifcollector.dto.GifDto;
 import com.tesseractus.gifcollector.dto.TagRequestDto;
 import com.tesseractus.gifcollector.dto.UserDto;
@@ -12,19 +11,12 @@ import com.tesseractus.gifcollector.model.TesseractusUserDetails;
 import com.tesseractus.gifcollector.repository.GifRepository;
 import com.tesseractus.gifcollector.repository.GifTagLinkRepository;
 import com.tesseractus.gifcollector.repository.GifTagRepository;
-import com.tesseractus.gifcollector.repository.UserRepository;
-import javassist.tools.web.BadHttpRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -65,7 +57,6 @@ public class GifService {
 
     public List<GifDto> findByPrincipal(TesseractusUserDetails userDetails) {
         UserDto userDto = userService.getUser(userDetails.getUsername());
-
         return gifRepository.findByOwnerId(userDto.getId()).stream()
                 .map(gif -> modelMapper.map(gif, GifDto.class))
                 .collect(Collectors.toList());

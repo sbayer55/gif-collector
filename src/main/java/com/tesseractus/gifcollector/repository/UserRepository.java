@@ -1,7 +1,6 @@
 package com.tesseractus.gifcollector.repository;
 
 import com.tesseractus.gifcollector.dao.User;
-import com.tesseractus.gifcollector.dto.UserDto;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

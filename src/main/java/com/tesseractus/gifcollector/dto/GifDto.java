@@ -2,7 +2,6 @@ package com.tesseractus.gifcollector.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.tesseractus.gifcollector.dao.GifTag;
 import com.tesseractus.gifcollector.jackson.LocalDateTimeDeserializer;
 import lombok.Getter;
 import lombok.Setter;
