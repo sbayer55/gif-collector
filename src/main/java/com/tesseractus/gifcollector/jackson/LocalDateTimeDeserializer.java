@@ -15,7 +15,8 @@ public class LocalDateTimeDeserializer extends JsonDeserializer<LocalDateTime> {
     public static final String GIPHY_DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     @Override
-    public LocalDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+    public LocalDateTime deserialize(JsonParser jsonParser,
+                                     DeserializationContext deserializationContext) throws IOException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(GIPHY_DATETIME_FORMAT);
         String dateTimeString = jsonParser.getText();
         try {
